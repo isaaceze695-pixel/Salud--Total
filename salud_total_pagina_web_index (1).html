@@ -1,0 +1,443 @@
+# Proyecto: Salud Total — Sitio web completo (5 páginas)
+
+**Estructura del proyecto (archivos para descargar / subir a GitHub):**
+
+```
+salud-total/
+├─ index.html
+├─ about.html
+├─ servicios.html
+├─ contacto.html
+├─ recursos.html
+├─ css/
+│  └─ style.css
+├─ js/
+│  └─ form.js
+├─ images/
+│  ├─ logo.png
+│  ├─ hero.jpg
+│  └─ equipo1.jpg
+├─ videos/
+│  └─ intro.mp4
+└─ README.txt
+```
+
+---
+
+A continuación están los contenidos listos para copiar a cada archivo. Todos los enlaces internos usan rutas relativas (abren en la misma ventana). Los enlaces externos abren en nueva pestaña (`target="_blank" rel="noopener"`). El sitio está construido con HTML semántico, tiene controles de accesibilidad (skip link, etiquetas y roles), es responsive con CSS externo y contiene un video embebido (`<video>` con archivo local `videos/intro.mp4` y además un embed de YouTube como alternativa).
+
+---
+
+## Archivo: css/style.css
+```css
+/* Estilos base, responsive y accesibles */
+:root{
+  --accent:#0b6fb1;
+  --accent-2:#0a80c6;
+  --muted:#6b7280;
+  --bg:#f7fbff;
+  --text:#0f1724;
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;font-family:Inter,system-ui,Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg);line-height:1.45}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);}
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{position:static;width:auto;height:auto;padding:8px;background:#fff;border:2px solid var(--accent);z-index:1000}
+.container{max-width:1100px;margin:0 auto;padding:16px}
+.header{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+.header .inner{display:flex;align-items:center;justify-content:space-between;padding:12px}
+.brand{display:flex;gap:12px;align-items:center}
+.brand img{width:48px;height:48px;border-radius:8px;background:#fff;padding:6px}
+nav.primary a{margin-left:14px;color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600}
+.hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;padding:28px}
+.hero h1{font-size:2rem;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.card{background:#fff;padding:14px;border-radius:12px;box-shadow:0 8px 20px rgba(15,30,50,0.06)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact-form{background:#fff;padding:14px;border-radius:10px}
+input,textarea,select{width:100%;padding:10px;border:1px solid #e6eef8;border-radius:8px;font-size:0.95rem}
+button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:700}
+.footer{font-size:0.95rem;padding:20px;color:#223}
+/* responsive */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;}
+  .cards{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  nav.primary a{display:none}
+}
+/* focus outlines for accessibility */
+:focus{outline:3px solid rgba(11,111,177,0.15);outline-offset:3px}
+```
+
+---
+
+## Archivo: index.html
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Total — Inicio</title>
+  <meta name="description" content="Salud Total - Centro de bienestar y salud integral">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+  <header class="header" role="banner">
+    <div class="container inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="Logotipo Salud Total">
+        <div>
+          <strong>Salud Total</strong>
+          <div style="font-size:0.85rem;color:rgba(255,255,255,0.9)">Centro de bienestar</div>
+        </div>
+      </div>
+      <nav class="primary" role="navigation" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Tu salud, nuestra prioridad</h1>
+        <p>Atención médica integral, consultas online, programas de prevención y atención de urgencias.</p>
+        <a class="button" href="contacto.html">Pedir turno</a>
+
+        <div class="cards" aria-hidden="false">
+          <article class="card">
+            <h3>Consultas médicas</h3>
+            <p>Especialidades médicas para toda la familia.</p>
+          </article>
+          <article class="card">
+            <h3>Programas preventivos</h3>
+            <p>Chequeos y campañas de vacunación.</p>
+          </article>
+          <article class="card">
+            <h3>Telemedicina</h3>
+            <p>Consulta por videollamada y receta electrónica.</p>
+          </article>
+        </div>
+      </div>
+      <aside aria-label="Imagen ilustrativa" style="text-align:center">
+        <!-- imagen relativa dentro de /images -->
+        <img src="images/hero.jpg" alt="Equipo médico de Salud Total" style="border-radius:10px;box-shadow:0 12px 30px rgba(12,40,80,0.06)">
+      </aside>
+    </section>
+
+    <section aria-labelledby="video-title">
+      <h2 id="video-title">Conoce Salud Total</h2>
+      <p>Video institucional — reproducible dentro de la página:</p>
+
+      <!-- Video local embebido -->
+      <video controls width="720" preload="metadata">
+        <source src="videos/intro.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video. Puedes ver el video <a href="videos/intro.mp4">aquí</a>.
+      </video>
+
+      <p style="margin-top:8px">Alternativa: video embebido de YouTube (si lo prefieres):</p>
+      <div style="aspect-ratio:16/9;max-width:720px">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video institucional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p><strong>Salud Total</strong> · Calle Falsa 123, Montevideo · Tel +598 2 123 4567</p>
+      <p><a href="https://www.minsalud.gov.uy" target="_blank" rel="noopener">Ministerio de Salud (externo)</a></p>
+    </div>
+  </footer>
+</body>
+</html>
+```
+
+---
+
+## Archivo: about.html
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Total — Nosotros</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+  <header class="header">
+    <div class="container inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="Logotipo Salud Total">
+        <div>
+          <strong>Salud Total</strong>
+        </div>
+      </div>
+      <nav class="primary" role="navigation" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <h1>Quiénes somos</h1>
+    <p>Breve descripción de la institución, misión, visión y valores. Información accesible, con encabezados y listas para facilitar la lectura.</p>
+
+    <section aria-labelledby="equipo">
+      <h2 id="equipo">Nuestro equipo</h2>
+      <div class="two-col">
+        <figure>
+          <img src="images/equipo1.jpg" alt="Foto del equipo médico">
+          <figcaption>Dra. María Pérez — Medicina familiar</figcaption>
+        </figure>
+        <div>
+          <p>Perfiles del personal, certificaciones y contacto profesional.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Salud Total</div>
+  </footer>
+</body>
+</html>
+```
+
+---
+
+## Archivo: servicios.html
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Total — Servicios</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+  <header class="header">
+    <div class="container inner">
+      <div class="brand"><img src="images/logo.png" alt="logo"></div>
+      <nav class="primary" role="navigation" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1>Servicios</h1>
+    <section>
+      <h2>Atención primaria</h2>
+      <p>Control de patologías crónicas, vacunación y seguimiento.</p>
+    </section>
+    <section>
+      <h2>Laboratorio y diagnóstico</h2>
+      <p>Analíticas y estudios por imagen con entrega digital de resultados.</p>
+    </section>
+    <section>
+      <h2>Urgencias</h2>
+      <p>Atención 24/7 para casos prioritarios.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Salud Total</div>
+  </footer>
+</body>
+</html>
+```
+
+---
+
+## Archivo: recursos.html
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Total — Recursos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+  <header class="header">
+    <div class="container inner">
+      <div class="brand"><img src="images/logo.png" alt="logo"></div>
+      <nav class="primary" role="navigation" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1>Recursos y enlaces</h1>
+    <ul>
+      <li><a href="https://www.minsalud.gov.uy" target="_blank" rel="noopener">Ministerio de Salud</a></li>
+      <li><a href="https://www.who.int" target="_blank" rel="noopener">OMS</a></li>
+    </ul>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Salud Total</div>
+  </footer>
+</body>
+</html>
+```
+
+---
+
+## Archivo: contacto.html
+```html
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Total — Contacto</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+  <header class="header">
+    <div class="container inner">
+      <div class="brand"><img src="images/logo.png" alt="logo"></div>
+      <nav class="primary" role="navigation" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1>Contacto</h1>
+    <p>Completa el formulario para enviarnos un mensaje. El formulario está configurado para funcionar con Formspree (o puedes sustituirlo por cualquier otro servicio que entregue emails a la casilla del docente).</p>
+
+    <section class="two-col">
+      <div class="contact-form">
+        <!-- Formulario funcional: Formspree (gratuito hasta cierto volumen). Cambia el action por tu endpoint de Formspree o por otro servicio.
+             Instrucciones rápidas en README.txt dentro del proyecto. -->
+        <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST" onsubmit="return handleSubmit(event)">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" required aria-required="true">
+
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" required aria-required="true">
+
+          <label for="phone">Teléfono</label>
+          <input id="phone" name="phone" type="tel">
+
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="5"></textarea>
+
+          <!-- campo honeypot para reducir spam -->
+          <input type="text" name="_gotcha" style="display:none">
+
+          <button type="submit">Enviar mensaje</button>
+          <div id="formStatus" role="status" aria-live="polite" style="margin-top:10px"></div>
+        </form>
+      </div>
+
+      <div>
+        <h2>Información</h2>
+        <p>Dirección: Calle Falsa 123, Montevideo</p>
+        <p>Teléfono: +598 2 123 4567</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/form.js"></script>
+</body>
+</html>
+```
+
+---
+
+## Archivo: js/form.js
+```javascript
+// Manejador de envío para mejorar la experiencia: evita recarga y muestra mensajes.
+function handleSubmit(e){
+  e.preventDefault();
+  const form = e.target;
+  const status = document.getElementById('formStatus');
+  status.textContent = 'Enviando...';
+
+  // Envío usando fetch al action del form
+  const action = form.action;
+  const data = new FormData(form);
+
+  fetch(action, {
+    method: 'POST',
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  }).then(response => {
+    if(response.ok){
+      status.textContent = 'Mensaje enviado correctamente. Gracias.';
+      form.reset();
+    } else {
+      response.json().then(data => {
+        if(data && data.errors){
+          status.textContent = data.errors.map(err => err.message).join(', ') || 'Error al enviar';
+        } else {
+          status.textContent = 'Error al enviar el formulario.';
+        }
+      }).catch(()=> status.textContent = 'Error al enviar el formulario.');
+    }
+  }).catch(()=>{
+    status.textContent = 'No se pudo conectar con el servicio de envío. Comprueba la configuración.';
+  });
+  return false;
+}
+```
+
+---
+
+## Archivo: README.txt (instrucciones rápidas)
+```
+1) Reemplaza en contacto.html la URL de Formspree por la que obtengas al crear tu formulario en https://formspree.io (o usa EmailJS, Netlify Forms, etc).
+
+2) Rutas locales: coloca las imágenes en /images y el video en /videos/intro.mp4 para que el video local funcione.
+
+3) Para probar el formulario sin servidor propio: crea una cuenta gratuita en Formspree, crea un formulario y copia el ID en el action del form (https://formspree.io/f/XXXXX). El docente recibirá los emails en la cuenta asociada.
+
+4) Para publicar: sube la carpeta salud-total a GitHub y activa GitHub Pages (branch main / carpeta / root) o despliega en Netlify/Vercel.
+```
+
+---
+
+Fin del proyecto listo para copiar en tu equipo o para que yo genere un ZIP y te lo entregue. Si querés, hago lo siguiente ahora:
+
+- Reemplazo `https://formspree.io/f/your-form-id` por el ID que me des y lo pruebo (no puedo enviar desde aquí, pero te dejo todo listo). 
+- Genero el ZIP descargable con todos los archivos (necesitaré crear el archivo en el panel). 
+- Subo el proyecto a un repositorio de ejemplo y te doy instrucciones paso a paso para publicarlo en GitHub Pages.
+
+Decime qué querés que haga ahora y lo hago inmediatamente.
